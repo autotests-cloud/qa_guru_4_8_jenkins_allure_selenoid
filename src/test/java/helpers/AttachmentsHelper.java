@@ -31,6 +31,21 @@ public class AttachmentsHelper {
         return getWebDriver().getPageSource().getBytes(StandardCharsets.UTF_8);
     }
 
+    @Attachment(value = "Video", type = "text/html", fileExtension = ".html")
+    public static String attachVideo() {
+        return "<html><body><video width='100%' height='100%' controls autoplay><source src='"
+                + getVideoUrl()
+                + "' type='video/mp4'></video></body></html>";
+    }
+
+    public static String getVideoUrl() {
+        return "https://selenoid.autotests.cloud/video/" + getSessionId() + ".mp4";
+    }
+
+    public static String getSessionId(){
+        return ((RemoteWebDriver) getWebDriver()).getSessionId().toString();
+    }
+
     public static String getConsoleLogs() {
         return String.join("\n", Selenide.getWebDriverLogs(BROWSER));
     }
