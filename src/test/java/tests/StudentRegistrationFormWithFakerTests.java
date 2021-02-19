@@ -77,4 +77,13 @@ public class StudentRegistrationFormWithFakerTests extends TestBase {
         $x("//td[text()='Address']").parent().shouldHave(text(currentAddress));
         $x("//td[text()='State and City']").parent().shouldHave(text(state + " " + city));
     }
+
+    @Test
+    void negativeFillFormTest() {
+        open("https://demoqa.com/automation-practice-form");
+        $(".practice-form-wrapper").shouldHave(text("Student Registration Form"));
+
+        $("#submit").click();
+        $("#example-modal-sizes-title-lg").shouldHave(text("Thanks for submitting the form"));
+    }
 }
