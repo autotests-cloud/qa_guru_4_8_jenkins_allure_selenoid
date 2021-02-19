@@ -16,14 +16,16 @@ public class TestBase {
         addListener("AllureSelenide", new AllureSelenide().screenshots(true).savePageSource(true));
         Configuration.browser = System.getProperty("browser", "chrome");
         Configuration.startMaximized = true;
-        // config for Java + Selenide
-        DesiredCapabilities capabilities = new DesiredCapabilities();
-        capabilities.setCapability("enableVNC", true);
-        capabilities.setCapability("enableVideo", true);
-        Configuration.browserCapabilities = capabilities;
-        Configuration.remote = "https://user1:1234@selenoid.autotests.cloud:4444/wd/hub/";
 
-        // config for Java + Selenium
+        if(System.getProperty("remote_driver") != null) {
+            // config for Java + Selenide
+            DesiredCapabilities capabilities = new DesiredCapabilities();
+            capabilities.setCapability("enableVNC", true);
+            capabilities.setCapability("enableVideo", true);
+            Configuration.browserCapabilities = capabilities;
+            Configuration.remote = System.getProperty("remote_driver");
+
+            // config for Java + Selenium
 //        DesiredCapabilities capabilities = new DesiredCapabilities();
 //        capabilities.setCapability("browserName", "chrome");
 //        capabilities.setCapability("browserVersion", "87.0");
@@ -35,6 +37,7 @@ public class TestBase {
 //                URI.create("http://selenoid:4444/wd/hub").toURL(),
 //                capabilities
 //        );
+        }
     }
 
     @AfterEach
@@ -42,7 +45,8 @@ public class TestBase {
         attachScreenshot("Last screenshot");
         attachPageSource();
         attachAsText("Browser console logs", getConsoleLogs());
-        attachVideo();
+        if(System.getProperty("video_storage") != null)
+            attachVideo();
         closeWebDriver();
     }
 }
