@@ -14,6 +14,7 @@ public class TestBase {
     @BeforeAll
     static void setup() {
         addListener("AllureSelenide", new AllureSelenide().screenshots(true).savePageSource(true));
+        Configuration.browser = System.getProperty("browser", "chrome");
         Configuration.startMaximized = true;
         // config for Java + Selenide
         DesiredCapabilities capabilities = new DesiredCapabilities();
