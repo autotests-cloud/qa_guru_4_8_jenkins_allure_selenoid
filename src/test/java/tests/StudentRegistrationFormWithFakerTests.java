@@ -1,6 +1,7 @@
 package tests;
 
 import com.github.javafaker.Faker;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import static com.codeborne.selenide.Condition.text;
@@ -79,6 +80,7 @@ public class StudentRegistrationFormWithFakerTests extends TestBase {
     }
 
     @Test
+    @Tag("negative")
     void negativeFillFormTest() {
         open("https://demoqa.com/automation-practice-form");
         $(".practice-form-wrapper").shouldHave(text("Student Registration Form"));
