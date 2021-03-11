@@ -1,6 +1,7 @@
 package tests;
 
 import com.github.javafaker.Faker;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
@@ -11,6 +12,7 @@ import static com.codeborne.selenide.Selenide.*;
 public class StudentRegistrationFormWithFakerTests extends TestBase {
 
     @Test
+    @Disabled
     void successfulFillFormTest() {
         Faker faker = new Faker();
 
@@ -80,6 +82,7 @@ public class StudentRegistrationFormWithFakerTests extends TestBase {
     }
 
     @Test
+    @Disabled
     @Tag("negative")
     void negativeFillFormTest() {
         open("https://demoqa.com/automation-practice-form");
